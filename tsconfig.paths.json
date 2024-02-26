@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@middleware": ["./src/middleware"],
+      "@models": ["./src/models"],
+      "@routes": ["./src/routes"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@types": ["./my-album-types"]
+    }
+  }
+}

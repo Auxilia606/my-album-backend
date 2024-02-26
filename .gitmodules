@@ -1,0 +1,3 @@
+[submodule "my-album-types"]
+	path = my-album-types
+	url = https://github.com/Auxilia606/my-album-types.git
