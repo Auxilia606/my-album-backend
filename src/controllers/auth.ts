@@ -90,6 +90,17 @@ export const check: Router.IMiddleware<UserState> = async (ctx) => {
   ctx.body = user;
 };
 
+export const getUserPhotos: Router.IMiddleware<UserState> = async (ctx) => {
+  const { user } = ctx.state;
+
+  if (!user) {
+    ctx.status = 401;
+    return;
+  }
+
+  ctx.body = { photos: user.photos };
+};
+
 export const logout: Router.IMiddleware = async (ctx) => {
   ctx.cookies.set(AUTH_COOKIE_NAME);
   ctx.status = 204;

@@ -1,5 +1,5 @@
-import { type UserDTO } from '@types';
+import { type UserDocument } from '@models';
 
 export type UserState = {
-  user: UserDTO;
+  user: UserDocument;
 };

@@ -1,6 +1,7 @@
 import cors from '@koa/cors';
 import dotenv from 'dotenv';
 import Koa from 'koa';
+import koaBody from 'koa-body';
 import bodyParser from 'koa-bodyparser';
 import Router from 'koa-router';
 import mongoose from 'mongoose';
@@ -14,6 +15,7 @@ const { PORT, MONGO_URI } = process.env;
 const app = new Koa();
 const router = new Router();
 
+app.use(koaBody({ multipart: true }));
 app.use(cors({ credentials: true }));
 router.use(api.routes());
 
