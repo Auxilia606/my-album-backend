@@ -11,7 +11,7 @@ exports.auth = new koa_router_1.default();
 exports.auth.post('/register', auth_1.register);
 exports.auth.post('/login', auth_1.login);
 exports.auth.get('/check', _middleware_1.checkLoggedIn, auth_1.check);
-exports.auth.get('/photos', _middleware_1.checkLoggedIn, auth_1.getUserPhotos);
+exports.auth.get('/photos', auth_1.getUserPhotos);
 exports.auth.post('/logout', auth_1.logout);
 exports.auth.post('/check/email', auth_1.checkEmail);
 exports.auth.post('/check/nickname', auth_1.checkNickName);
