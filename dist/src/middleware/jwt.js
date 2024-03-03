@@ -17,7 +17,8 @@ const user_1 = require("../controllers/user");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const constants_1 = require("./constants");
 const jwtMiddleware = (ctx, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const token = ctx.cookies.get(constants_1.AUTH_COOKIE_NAME);
+    // const token = ctx.cookies.get(AUTH_COOKIE_NAME);
+    const token = ctx.request.header.authorization;
     if (!token) {
         return yield next();
     }
@@ -35,6 +36,7 @@ const jwtMiddleware = (ctx, next) => __awaiter(void 0, void 0, void 0, function*
         if (decoded.exp - now > 60 * 60 * 24)
             return yield next();
         const newToken = yield (0, user_1.generateToken)(user.email, user.nickname);
+        ctx.response.header.authorization = newToken;
         ctx.cookies.set(constants_1.AUTH_COOKIE_NAME, newToken, constants_1.cookieOption);
         return yield next();
     }

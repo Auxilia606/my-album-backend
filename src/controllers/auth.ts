@@ -1,4 +1,4 @@
-import { AUTH_COOKIE_NAME, cookieOption, type UserState } from '@middleware';
+import { AUTH_COOKIE_NAME, type UserState } from '@middleware';
 import { User } from '@models';
 import {
   type UserDTO,
@@ -69,11 +69,10 @@ export const login: Router.IMiddleware = async (ctx) => {
 
     const data: Partial<UserDTO> = user.toJSON();
     delete data.password;
-    ctx.body = data;
 
     const token = await generateToken(user.email, user.nickname);
 
-    ctx.cookies.set(AUTH_COOKIE_NAME, token, cookieOption);
+    ctx.body = { ...data, token };
   } catch (error: any) {
     ctx.throw(500, error);
   }

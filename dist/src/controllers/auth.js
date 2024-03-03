@@ -56,9 +56,8 @@ const login = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const data = user.toJSON();
         delete data.password;
-        ctx.body = data;
         const token = yield (0, user_1.generateToken)(user.email, user.nickname);
-        ctx.cookies.set(_middleware_1.AUTH_COOKIE_NAME, token, _middleware_1.cookieOption);
+        ctx.body = Object.assign(Object.assign({}, data), { token });
     }
     catch (error) {
         ctx.throw(500, error);

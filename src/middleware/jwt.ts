@@ -8,7 +8,8 @@ export const jwtMiddleware: Router.IMiddleware<UserState> = async (
   ctx,
   next,
 ) => {
-  const token = ctx.cookies.get(AUTH_COOKIE_NAME);
+  // const token = ctx.cookies.get(AUTH_COOKIE_NAME);
+  const token = ctx.request.header.authorization;
 
   if (!token) {
     return await next();
@@ -33,6 +34,7 @@ export const jwtMiddleware: Router.IMiddleware<UserState> = async (
 
     const newToken = await generateToken(user.email, user.nickname);
 
+    ctx.response.header.authorization = newToken;
     ctx.cookies.set(AUTH_COOKIE_NAME, newToken, cookieOption);
 
     return await next();
